@@ -1,6 +1,9 @@
 name: Build HTML5
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -35,6 +38,11 @@ jobs:
         run: |
           haxelib run lime test html5 -release
 
+      - name: Upload HTML5 build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Psych-Engine-HTML5
+          path: export/
       - name: Upload HTML5 build
         uses: actions/upload-artifact@v4
         with:
