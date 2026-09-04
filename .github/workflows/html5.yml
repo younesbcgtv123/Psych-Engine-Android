@@ -1,10 +1,6 @@
 name: Build HTML5
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
   build:
@@ -35,6 +31,14 @@ jobs:
           haxelib install extension-webview
 
       - name: Build HTML5
+        run: |
+          haxelib run lime test html5 -release
+
+      - name: Upload HTML5 build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Psych-Engine-HTML5
+          path: export/      - name: Build HTML5
         run: |
           haxelib run lime test html5 -release
 
